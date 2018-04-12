@@ -42,10 +42,10 @@
                 </div>
             </form>
         </div>
-        
+
         <br/>
 
-    
+
         <div class="card" id="serverList">
             <h5 class="card-header"> Server List
                  <button class="serverFormDivBtn btn btn-primary float-right" title="Add Server"><i class="fa fa-plus" aria-hidden="true"></i></button>
@@ -68,7 +68,7 @@
         </div>
 
         <br/>
-        
+
         <div class="card">
             <h5 class="card-header"> Server Info
                  <button class="serverFormDivBtn btn btn-primary float-right" title="Add Server"><i class="fa fa-plus" aria-hidden="true"></i></button>
@@ -104,61 +104,6 @@
             console.log(JSON.stringify(this));
         }
 
-        // Get VMStores Item
-        // db.vmstores.get('tboltsr23', function(item){
-        //     item.log();
-        // });
-
-        // Get All VMStores Item
-        // db.vmstores.toCollection().toArray(function(c){
-
-        //     console.log(c)
-        // });
-
-        // Insert Bulk VMStore
-        // var dataInsert = [
-        //     {servername: "tboltsr25", username: 'admin', password:'tintri99'},
-        //     {servername: "tboltsr26", username: 'admin', password:'tintri99'},
-        //     {servername: "tboltsr27", username: 'admin', password:'tintri99'},
-        //     {servername: "tboltsr28", username: 'admin', password:'tintri99'},
-        //     {servername: "tboltsr29", username: 'admin', password:'tintri99'},
-        //     {servername: "tboltsr21", username: 'admin', password:'tintri99'},
-        //     {servername: "tboltsr22", username: 'admin', password:'tintri99'},
-        //     {servername: "tboltsr23", username: 'admin', password:'tintri99'},
-        //     {servername: "tboltsr24", username: 'admin', password:'tintri99'}
-
-        // ];
-        // db.vmstores.bulkAdd(dataInsert)
-        // .then(function(e){
-        //     console.log(e);
-        // });
-
-        // Insert VMStore
-        // db.vmstores.add({servername: "tboltsr23", username: 'admin', password:'tintri99'})
-        // .then(function(e){
-        //     console.log(e);
-        // });
-
-        // Update VMStores
-        // db.vmstores.update("tboltsr23", {username: 'admin', password:'tintri99'})
-        // .then(function(e){
-        //     console.log(e);
-        // });
-
-        // Delete VMStores
-        // db.vmstores.delete("tboltsr23").
-        // then(function(e){
-        //      // console.log(e);
-        //      e.log();
-        // });
-        
-        
-        // Get VMStores Item
-        // db.vmstores.get('tboltsr23', function(item){
-        //     console.log(item);
-        // });
-
-
         $("#serverFormDiv").hide();
 
         // List Server Details
@@ -188,13 +133,13 @@
                         return btn;
                     }
                 }
-            ]   
+            ]
         });
 
         function alertMsg(message, status){
 
             $("#alertMsg").removeClass().addClass(" alert alert-"+status).html(message).show();
-            setTimeout(function(){ 
+            setTimeout(function(){
                 $("#alertMsg").hide();
              }, 3000);
         }
@@ -233,25 +178,25 @@
             }
             alertMsg("Please fill all the details","danger");
         });
-        
+
 
         $(document).on('click', '.editServer', function(){
             servername = $(this).attr('data-servername');
 
             db.vmstores.get(servername, function(item){
 
-                $.each(item, function(key, value) {  
-                    var ctrl = $('[name='+key+']', $("form#serverForm"));  
-                    switch(ctrl.prop("type")) { 
-                        case "radio": case "checkbox":   
+                $.each(item, function(key, value) {
+                    var ctrl = $('[name='+key+']', $("form#serverForm"));
+                    switch(ctrl.prop("type")) {
+                        case "radio": case "checkbox":
                             ctrl.each(function() {
                                 if($(this).attr('value') == value) $(this).attr("checked",value);
-                            });   
-                            break;  
+                            });
+                            break;
                         default:
-                            ctrl.val(value); 
-                    }  
-                });  
+                            ctrl.val(value);
+                    }
+                });
             });
         });
 
