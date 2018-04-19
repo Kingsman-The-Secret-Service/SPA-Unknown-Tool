@@ -78,9 +78,9 @@
                 </div>
             </form>
         </div>
-        
+
         <br/>
-    
+
         <div class="card" id="serverList">
             <h5 class="card-header"> Server List
                  <button class="selectedServerBtn btn btn-info float-right" title="Select Server"><i class="fa fa-eye" aria-hidden="true"></i></button>
@@ -104,18 +104,19 @@
         </div>
         </div>
         <br/>
-        
+
         <div class="card">
             <h5 class="card-header"> Server Info
                  <a href="javascript:downloadPdf()" class="serverFormDivBtn btn btn-primary float-right" title="Download PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
              </h5>
-             <div id="severtInfoList" class="card-body"></div> 
+             <div id="severtInfoList" class="card-body"></div>
        </div>
     </div>
-   
+
     <div id="editor"></div>
 
     <script type="text/javascript">
+        const Dexie = require('dexie');
         var $ = require("jquery");
         var html2canvas = require('html2canvas');
         var dt = require( 'datatables.net' )();
@@ -124,7 +125,6 @@
         pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
     </script>
-    <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
     <script src="./js/dataTables.checkboxes.min.js"></script>
     <script>
         var request = require('request').defaults({strictSSL: false});
@@ -137,7 +137,7 @@
                         unique:"disksCount",
                         data:"disksCount"
                     },
-                    {   
+                    {
                         unique:'vmsCount',
                         data:'vmsCount'
                     },
@@ -202,7 +202,7 @@
                             var logicalUsedGB = ((spaceSavingsFactor * spaceUsedPhysicalGiB) / 1024).toFixed(2) ;
                             if (isNaN(logicalUsedGB)) {
                                 return logicalUsedGB;
-                            } 
+                            }
                             return logicalUsedGB +' TB';
                         }
                     },
@@ -225,7 +225,7 @@
                                 return spaceSavingsFactor.toFixed(1) +' X';
                             return spaceSavingsFactor;
                         }
-                    }                    
+                    }
                 ]
             },
             {
@@ -238,7 +238,7 @@
                     }
                 ]
             },
-            {                
+            {
                 method:"GET",
                 apiUrl: "/api/v310/servicegroup",
                 dataAttr:[
@@ -246,20 +246,20 @@
                         unique:'servicegroup',
                         data:'total'
                     }
-                ]       
+                ]
             }
-            
+
         ]
 
         function buildRequestOptions(skeleton, servername, headers = {}, body={}){
 
-            var _headers = { 
+            var _headers = {
                 'Content-Type': 'application/json',
             };
 
             var _body = {};
 
-            return options = { 
+            return {
                     'method': skeleton['method'],
                     'url': 'https://'+servername + skeleton['apiUrl'],
                     'headers': Object.assign(_headers, headers),
@@ -277,7 +277,7 @@
                     argument.push(collections[value]);
                 });
             }
-            
+
             if (keys.hasOwnProperty('expression')){
                 return keys['expression'].apply(this, argument);
             }
@@ -293,7 +293,7 @@
                 method:"POST",
                 apiUrl: "/api/v310/session/login",
                 body:{
-                    'username':item['username'], 
+                    'username':item['username'],
                     'password':item['password'],
                     'typeId':'com.tintri.api.rest.vcommon.dto.rbac.RestApiCredentials'
                 }
@@ -307,7 +307,7 @@
                     alert("Failed to login VMStore (" + servername + ")", error);
                     throw new Error(error);
                 }
-                cookie = response.headers['set-cookie'];
+                var cookie = response.headers['set-cookie'];
 
                 console.log("Logged into VMStore (" + servername + ") successfully");
 
@@ -330,7 +330,7 @@
 
                                 result = '<i class="fa fa-lg fa-times-circle" aria-hidden="true"></i>';
                             }
-                            
+
                             $('#' + sanitizeServerName(servername))
                             .find('.' + item['unique'])
                             .html('<b><font size="4">'+result+'</font></b>');
@@ -348,7 +348,7 @@
 
         function serverInfoTemplate(servername){
 
-            html = '<div class="card serverInfo" id="'+ sanitizeServerName(servername) +'">';
+            var html = '<div class="card serverInfo" id="'+ sanitizeServerName(servername) +'">';
             html += '<h5 class="card-header vmstore"> '+ servername +'</h5>';
             html += '<div class="card-body text-center">';
             html += '<div class="card-group">';
@@ -506,7 +506,7 @@
             });
 
             Promise.all(canvas).then(function(values) {
-                
+
                 var content = [];
 
                 $.each(values, function(e, image){
@@ -516,13 +516,13 @@
                     });
                 });
 
-                docDefinition = {
+                var docDefinition = {
                     pageSize: 'A4',
                     pageOrientation: 'portrait',
                     content: content,
-                    footer: { 
+                    footer: {
                         columns: [
-                            { 
+                            {
                                 text: 'Generated @ '+ new Date(),
                                 alignment: 'right',
                                 fontSize: 8,
@@ -533,20 +533,6 @@
                 };
                 pdfMake.createPdf(docDefinition).download("VMStore-server-details.pdf");
             });
-
-            // html2canvas(document.getElementById('severtInfoList')).then(function(canvas) {
-            //     docDefinition = {
-            //         pageSize: 'A4',
-            //         pageOrientation: 'landscape',
-            //         pageMargins: [ 40, 60, 40, 60 ],
-            //         content: [{
-            //               image: canvas.toDataURL(),
-            //               fit:[760,500]
-            //             }
-            //         ]
-            //     };
-            //     pdfMake.createPdf(docDefinition).download("VMStore-server-details.pdf");
-            // });
         }
         // DB
         var db = new Dexie('tintri_tool');
@@ -568,6 +554,7 @@
             console.log(JSON.stringify(this));
         }
 
+<<<<<<< HEAD:index.html
         // var dd = [
         //     {'servername':'tafm17','username':'admin','password':'tintri99'},
         //     {'servername':'tafs19','username':'admin','password':'tintri99'},
@@ -582,6 +569,22 @@
         //     {'servername':'tbolth5','username':'admin','password':'tintri99'}
 
         // ]
+=======
+        var dd = [
+            {'servername':'tafm17','username':'admin','password':'tintri99'},
+            {'servername':'tafs19','username':'admin','password':'tintri99'},
+            {'servername':'tafbv15','username':'admin','password':'tintri99'},
+            {'servername':'tafbv4','username':'admin','password':'tintri99'},
+            {'servername':'tafbh17','username':'admin','password':'tintri99'},
+            {'servername':'tafbh45','username':'admin','password':'tintri99'},
+            {'servername':'tafbh46','username':'admin','password':'tintri99'},
+            {'servername':'tafh6','username':'admin','password':'tintri99'},
+            {'servername':'tafhr2','username':'admin','password':'tintri99'},
+            {'servername':'tafbs14','username':'admin','password':'tintri99'},
+            {'servername':'tbolth5','username':'admin','password':'tintri99'}
+
+        ]
+>>>>>>> 45caf267f0705b55204959484ec6c49500280a6c:app/index.html
         // db.vmstores.bulkAdd(dd);
 
         $("#serverFormDiv").hide();
@@ -612,8 +615,13 @@
                 },
                 {
                     'targets':3,
+<<<<<<< HEAD:index.html
                     render: function(){
                         return '******';
+=======
+                    'render': function(){
+                        return "*****";
+>>>>>>> 45caf267f0705b55204959484ec6c49500280a6c:app/index.html
                     }
                 },
                 {
@@ -628,7 +636,7 @@
                         return btn;
                     }
                 }
-            ] , 
+            ] ,
             "select": {
                 'style':'multi',
             }
@@ -637,7 +645,7 @@
         function alertMsg(message, status){
 
             $("#alertMsg").removeClass().addClass(" alert alert-"+status).html(message).show();
-            setTimeout(function(){ 
+            setTimeout(function(){
                 $("#alertMsg").hide();
              }, 3000);
         }
@@ -667,11 +675,11 @@
                         hitMeHard(item);
                     });
                 });
-                
+
             } else {
                 alert('Select the VMStore');
             }
-            
+
         });
 
         $(document).on('click', '#saveServerDetails',function(e){
@@ -695,33 +703,37 @@
             }
             alertMsg("Please fill all the details","danger");
         });
-        
+
 
         $(document).on('click', '.editServer', function(){
             var servername = $(this).attr('data-servername');
 
             db.vmstores.get(servername, function(item){
 
-                $.each(item, function(key, value) {  
-                    var ctrl = $('[name='+key+']', $("form#serverForm"));  
-                    switch(ctrl.prop("type")) { 
-                        case "radio": case "checkbox":   
+                $.each(item, function(key, value) {
+                    var ctrl = $('[name='+key+']', $("form#serverForm"));
+                    switch(ctrl.prop("type")) {
+                        case "radio": case "checkbox":
                             ctrl.each(function() {
                                 if($(this).attr('value') == value) $(this).attr("checked",value);
-                            });   
-                            break;  
+                            });
+                            break;
                         default:
-                            ctrl.val(value); 
-                    }  
-                });  
+                            ctrl.val(value);
+                    }
+                });
             });
         });
 
         // Delete Server Details
         $(document).on('click', ".removeServer", function(e){
             var servername = $(this).attr('data-servername');
+<<<<<<< HEAD:index.html
             servername = servername.bold();
             if (confirm('Are you sure you want to delete <b>'+servername +'</b> server?')) {
+=======
+            if (confirm('Are you sure you want to delete '+servername +' server?')) {
+>>>>>>> 45caf267f0705b55204959484ec6c49500280a6c:app/index.html
                 // Delete VMStores
                 db.vmstores.delete(servername).
                 then(function(e){

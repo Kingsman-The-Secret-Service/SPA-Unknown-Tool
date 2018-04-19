@@ -2,9 +2,11 @@
   "name": "VMstore-state-reporter",
   "version": "1.0.0",
   "description": "VMstore-state-reporter",
-  "main": "main.js",
+  "main": "app/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "keywords": [
     "Electron",
@@ -15,14 +17,52 @@
     "bootstrap": "^4.1.0",
     "datatables.net": "^1.10.16",
     "datatables.net-dt": "^1.10.16",
+<<<<<<< HEAD
+=======
+    "dexie": "^2.0.2",
+>>>>>>> 45caf267f0705b55204959484ec6c49500280a6c
     "electron-compile": "^6.4.2",
     "electron-squirrel-startup": "^1.0.0",
     "html2canvas": "^1.0.0-alpha.12",
     "jquery": "*",
-    "pdfmake": "^0.1.36"
+    "pdfmake": "^0.1.36",
+    "request": "^2.85.0"
   },
   "author": "Kaviarasan K K",
   "devDependencies": {
+<<<<<<< HEAD
     "electron-prebuilt-compile": "1.8.4"
+=======
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "electron-forge": "^5.2.0",
+    "electron-prebuilt-compile": "1.8.4"
+  },
+  "config": {
+    "forge": {
+      "make_targets": {
+        "win32": [
+          "squirrel"
+        ]
+      },
+      "electronPackagerConfig": {
+        "packageManager": "npm"
+      },
+      "electronWinstallerConfig": {
+        "name": "VMstore_state_reporter"
+      },
+      "electronInstallerDebian": {},
+      "electronInstallerRedhat": {},
+      "github_repository": {
+        "owner": "Kaviarasan K K",
+        "name": "Kaviarasan K K"
+      },
+      "windowsStoreConfig": {
+        "packageName": "",
+        "name": "VMstorestatereporter"
+      }
+    }
+>>>>>>> 45caf267f0705b55204959484ec6c49500280a6c
   }
 }
