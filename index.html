@@ -288,7 +288,7 @@
         function hitMeHard(item){
 
             var servername = item['servername'];
-
+            console.log('hitMeHard',servername);
             var loginSkeleton = {
                 method:"POST",
                 apiUrl: "/api/v310/session/login",
@@ -298,6 +298,9 @@
                     'typeId':'com.tintri.api.rest.vcommon.dto.rbac.RestApiCredentials'
                 }
             };
+            console.log('hitMeHard',servername);
+                console.log('loginSkeleton',loginSkeleton);
+            
             var loginoptions = buildRequestOptions(loginSkeleton, servername, {}, loginSkeleton['body']);
             request(loginoptions, function(error, response, body){
                 if(error){
@@ -565,7 +568,7 @@
             console.log(JSON.stringify(this));
         }
 
-        // dd = [
+        // var dd = [
         //     {'servername':'tafm17','username':'admin','password':'tintri99'},
         //     {'servername':'tafs19','username':'admin','password':'tintri99'},
         //     {'servername':'tafbv15','username':'admin','password':'tintri99'},
@@ -608,10 +611,16 @@
                     }
                 },
                 {
+                    'targets':3,
+                    render: function(){
+                        return '******';
+                    }
+                },
+                {
                     'targets':4,
                     "render": function ( data, type, row ) {
 
-                        btn = '<div class="btn-group" role="group">';
+                        var btn = '<div class="btn-group" role="group">';
                         btn += '<a data-servername="'+row['servername']+'" class="viewServer btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i></a>';
                         btn += '<a data-servername="'+row['servername']+'" class="serverFormDivBtn editServer btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
                         btn += '<a data-servername="'+row['servername']+'" class="removeServer btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>';
@@ -689,7 +698,7 @@
         
 
         $(document).on('click', '.editServer', function(){
-            servername = $(this).attr('data-servername');
+            var servername = $(this).attr('data-servername');
 
             db.vmstores.get(servername, function(item){
 
@@ -710,8 +719,9 @@
 
         // Delete Server Details
         $(document).on('click', ".removeServer", function(e){
-            servername = $(this).attr('data-servername');
-            if (confirm('Are you sure you want to delete "'+servername +'" server?')) {
+            var servername = $(this).attr('data-servername');
+            servername = servername.bold();
+            if (confirm('Are you sure you want to delete <b>'+servername +'</b> server?')) {
                 // Delete VMStores
                 db.vmstores.delete(servername).
                 then(function(e){
@@ -729,7 +739,7 @@
         });
 
         $(document).on('click', ".viewServer", function(){
-            servername = $(this).attr('data-servername');
+            var servername = $(this).attr('data-servername');
             db.vmstores.get(servername, function(item){
                 console.log(item);
                 hitMeHard(item);

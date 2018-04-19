@@ -6,17 +6,23 @@
   "scripts": {
     "start": "electron ."
   },
+  "keywords": [
+    "Electron",
+    "request",
+  ],
   "repository": "https://github.com/Kingsman-The-Secret-Service/VMStore-State-Reporter",
   "dependencies": {
     "bootstrap": "^4.1.0",
     "datatables.net": "^1.10.16",
     "datatables.net-dt": "^1.10.16",
+    "electron-compile": "^6.4.2",
+    "electron-squirrel-startup": "^1.0.0",
     "html2canvas": "^1.0.0-alpha.12",
     "jquery": "*",
     "pdfmake": "^0.1.36"
   },
   "author": "Kaviarasan K K",
   "devDependencies": {
-    "electron": "^1.8.4"
+    "electron-prebuilt-compile": "1.8.4"
   }
 }
