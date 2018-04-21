@@ -288,7 +288,7 @@
         function hitMeHard(item){
 
             var servername = item['servername'];
-
+            console.log('hitMeHard',servername);
             var loginSkeleton = {
                 method:"POST",
                 apiUrl: "/api/v310/session/login",
@@ -298,6 +298,9 @@
                     'typeId':'com.tintri.api.rest.vcommon.dto.rbac.RestApiCredentials'
                 }
             };
+            console.log('hitMeHard',servername);
+                console.log('loginSkeleton',loginSkeleton);
+            
             var loginoptions = buildRequestOptions(loginSkeleton, servername, {}, loginSkeleton['body']);
             request(loginoptions, function(error, response, body){
                 if(error){
@@ -551,6 +554,22 @@
             console.log(JSON.stringify(this));
         }
 
+<<<<<<< HEAD:index.html
+        // var dd = [
+        //     {'servername':'tafm17','username':'admin','password':'tintri99'},
+        //     {'servername':'tafs19','username':'admin','password':'tintri99'},
+        //     {'servername':'tafbv15','username':'admin','password':'tintri99'},
+        //     {'servername':'tafbv4','username':'admin','password':'tintri99'},
+        //     {'servername':'tafbh17','username':'admin','password':'tintri99'},
+        //     {'servername':'tafbh45','username':'admin','password':'tintri99'},
+        //     {'servername':'tafbh46','username':'admin','password':'tintri99'},
+        //     {'servername':'tafh6','username':'admin','password':'tintri99'},
+        //     {'servername':'tafhr2','username':'admin','password':'tintri99'},
+        //     {'servername':'tafbs14','username':'admin','password':'tintri99'},
+        //     {'servername':'tbolth5','username':'admin','password':'tintri99'}
+
+        // ]
+=======
         var dd = [
             {'servername':'tafm17','username':'admin','password':'tintri99'},
             {'servername':'tafs19','username':'admin','password':'tintri99'},
@@ -565,6 +584,7 @@
             {'servername':'tbolth5','username':'admin','password':'tintri99'}
 
         ]
+>>>>>>> 45caf267f0705b55204959484ec6c49500280a6c:app/index.html
         // db.vmstores.bulkAdd(dd);
 
         $("#serverFormDiv").hide();
@@ -595,8 +615,13 @@
                 },
                 {
                     'targets':3,
+<<<<<<< HEAD:index.html
+                    render: function(){
+                        return '******';
+=======
                     'render': function(){
                         return "*****";
+>>>>>>> 45caf267f0705b55204959484ec6c49500280a6c:app/index.html
                     }
                 },
                 {
@@ -703,7 +728,12 @@
         // Delete Server Details
         $(document).on('click', ".removeServer", function(e){
             var servername = $(this).attr('data-servername');
+<<<<<<< HEAD:index.html
+            servername = servername.bold();
+            if (confirm('Are you sure you want to delete <b>'+servername +'</b> server?')) {
+=======
             if (confirm('Are you sure you want to delete '+servername +' server?')) {
+>>>>>>> 45caf267f0705b55204959484ec6c49500280a6c:app/index.html
                 // Delete VMStores
                 db.vmstores.delete(servername).
                 then(function(e){
