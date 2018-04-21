@@ -1,28 +1,19 @@
 {
-  "name": "VMstore-state-reporter",
+  "name": "vmstore-state-reporter",
   "version": "1.0.0",
-  "description": "VMstore-state-reporter",
+  "description": "VMstore State Reporter",
   "main": "app/main.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
-  "keywords": [
-    "Electron",
-    "request",
-  ],
   "repository": "https://github.com/Kingsman-The-Secret-Service/VMStore-State-Reporter",
   "dependencies": {
     "bootstrap": "^4.1.0",
     "datatables.net": "^1.10.16",
     "datatables.net-dt": "^1.10.16",
-<<<<<<< HEAD
-=======
     "dexie": "^2.0.2",
->>>>>>> 45caf267f0705b55204959484ec6c49500280a6c
-    "electron-compile": "^6.4.2",
-    "electron-squirrel-startup": "^1.0.0",
     "html2canvas": "^1.0.0-alpha.12",
     "jquery": "*",
     "pdfmake": "^0.1.36",
@@ -30,14 +21,13 @@
   },
   "author": "Kaviarasan K K",
   "devDependencies": {
-<<<<<<< HEAD
-    "electron-prebuilt-compile": "1.8.4"
-=======
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "electron-forge": "^5.2.0",
-    "electron-prebuilt-compile": "1.8.4"
+    "electron-prebuilt-compile": "1.8.4",
+    "electron-compile": "^6.4.2",
+    "electron-squirrel-startup": "^1.0.0"
   },
   "config": {
     "forge": {
@@ -63,6 +53,5 @@
         "name": "VMstorestatereporter"
       }
     }
->>>>>>> 45caf267f0705b55204959484ec6c49500280a6c
   }
 }
