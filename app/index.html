@@ -779,7 +779,8 @@
         function downloadSCPData(item, fileName,type, controller) {
             var pathType = '', typeFolder='';
             var servername = item['servername'];
-            var fs = require('fs');                
+            var fs = require('fs');
+			fileName = fileName.trim();			
             if (type =='cores') {
                 var dir = './cores';
                 if (!fs.existsSync(dir)){
